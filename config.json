@@ -1,7 +1,7 @@
 {
 	"name": "Two Column Checks",
 
-	"namespace": "Vanderbilt\\TwoColumnChecks",
+	"namespace": "Vanderbilt\\TwoColumnChecksExternalModule",
 
 	"authors": [
 		{
