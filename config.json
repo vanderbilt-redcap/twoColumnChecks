@@ -1,0 +1,41 @@
+{
+	"name": "Two Column Checks",
+
+	"namespace": "Vanderbilt\\TwoColumnChecks",
+
+	"authors": [
+		{
+			"name": "Scott J. Pearson",
+			"email": "datacore@vanderbilt.edu",
+			"institution": "Vanderbilt University Medical Center"
+		}
+	],
+
+	"description": "This PHP script reorients a left-vertically-aligned group of checkboxes into two columns - only if more than ten checkboxes exist in the list. This will save room on your form, but remember that you have to have them aligned as LV.",
+
+	"permissions": [
+		"hook_survey_page",
+		"select_data"
+	],
+
+	"links": {
+		"project": [
+		]
+	},
+
+	"no-auth-pages":[],
+
+	"project-settings": [
+	],
+
+	"system-settings": [
+		{
+		}
+	],
+        "compatibility": {
+	        "php-version-min": "5.5.0",
+	        "php-version-max": "",
+	        "redcap-version-min": "8.0.0",
+	        "redcap-version-max": ""
+        }
+}
