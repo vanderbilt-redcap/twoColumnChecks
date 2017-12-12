@@ -1,3 +1,4 @@
+<?php
 namespace Vanderbilt\TwoColumnChecksExternalModule;
 
 use ExternalModules\AbstractExternalModule;
