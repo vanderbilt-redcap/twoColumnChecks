@@ -17,25 +17,11 @@
 		"hook_survey_page",
 		"select_data"
 	],
-
-	"links": {
-		"project": [
-		]
-	},
-
-	"no-auth-pages":[],
-
-	"project-settings": [
-	],
-
-	"system-settings": [
-		{
-		}
-	],
-        "compatibility": {
-	        "php-version-min": "5.5.0",
-	        "php-version-max": "",
-	        "redcap-version-min": "8.0.0",
-	        "redcap-version-max": ""
-        }
+	
+	"compatibility": {
+		"php-version-min": "5.5.0",
+		"php-version-max": "",
+		"redcap-version-min": "8.0.0",
+		"redcap-version-max": ""
+	}
 }
