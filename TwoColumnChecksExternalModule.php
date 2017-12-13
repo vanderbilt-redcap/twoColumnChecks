@@ -5,11 +5,9 @@ use ExternalModules\AbstractExternalModule;
 use ExternalModules\ExternalModules;
 
 require_once APP_PATH_DOCROOT.'Classes/Files.php';
-require_once 'vendor/autoload.php';
-require_once 'EmailTriggerExternalModule.php';
 
 
-class EmailTriggerExternalModule extends AbstractExternalModule
+class TwoColumnChecksExternalModule extends AbstractExternalModule
 {
         private $email_requested = false;
 
@@ -24,7 +22,7 @@ class EmailTriggerExternalModule extends AbstractExternalModule
 		echo "	var checkboxes = {};\n";
 		echo "	$('tr td div.choicevert').each(function(index, ob) {\n";
 		echo "		var row = $(ob).parent().parent().attr('id');\n";
-		echo "		if (typeof checkboxes[row] == "undefined") {\n";
+		echo "		if (typeof checkboxes[row] == 'undefined') {\n";
 		echo "			checkboxes[row] = 0;\n";
 		echo "		}\n";
 		echo "		checkboxes[row]++;\n";
@@ -33,17 +31,17 @@ class EmailTriggerExternalModule extends AbstractExternalModule
 		echo "		var done = false;\n";
 		echo "		if (checkboxes[row] > 10) {\n";
 		echo "			var checksInCol = Math.ceil(checkboxes[row] / 2);\n";
-		echo "			$("#"+row+" td div.choicevert").each(function(index, ob) {\n";
+		echo "			$(\"#\"+row+\" td div.choicevert\").each(function(index, ob) {\n";
 		echo "				if (!done) {\n";
-		echo "					$(ob).parent().find("label.fl").after("<div id='"+row+"-left' class='leftCol'></div><div id='"+row+"-right' class='rightCol'></div>");\n";
+		echo "					$(ob).parent().find('label.fl').after(\"<div id='\"+row+\"-left' class='leftCol'></div><div id='\"+row+\"-right' class='rightCol'></div>\");\n";
 		echo "				}\n";
 		echo "				done = true;\n";
 		echo "			});\n";
-		echo "			$("#"+row+" td div.choicevert").each(function(index, ob) {\n";
+		echo "			$(\"#\"+row+\" td div.choicevert\").each(function(index, ob) {\n";
 		echo "				if (index < checksInCol) {\n";
-		echo "					$(ob).appendTo("#"+row+"-left");\n";
+		echo "					$(ob).appendTo(\"#\"+row+\"-left\");\n";
 		echo "				} else {\n";
-		echo "					$(ob).appendTo("#"+row+"-right");\n";
+		echo "					$(ob).appendTo(\"#\"+row+\"-right\");\n";
 		echo "				}\n";
 		echo "			});\n";
 		echo "		}\n";
