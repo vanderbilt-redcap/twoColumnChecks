@@ -21,7 +21,7 @@ class TwoColumnChecksExternalModule extends AbstractExternalModule
 		echo "function twoColumnCheckboxes() {\n";
 		echo "	var checkboxes = {};\n";
 		echo "	$('tr td div.choicevert').each(function(index, ob) {\n";
-		echo "		var row = $(ob).parent().parent().attr('id');\n";
+		echo "		var row = $(ob).closest('tr').attr('id');\n";
 		echo "		if (typeof checkboxes[row] == 'undefined') {\n";
 		echo "			checkboxes[row] = 0;\n";
 		echo "		}\n";
@@ -33,7 +33,11 @@ class TwoColumnChecksExternalModule extends AbstractExternalModule
 		echo "			var checksInCol = Math.ceil(checkboxes[row] / 2);\n";
 		echo "			$(\"#\"+row+\" td div.choicevert\").each(function(index, ob) {\n";
 		echo "				if (!done) {\n";
-		echo "					$(ob).parent().find('label.fl').after(\"<div id='\"+row+\"-left' class='leftCol'></div><div id='\"+row+\"-right' class='rightCol'></div>\");\n";
+        if (version_compare(REDCAP_VERSION, '12.0.0', '<')) {
+		    echo "					$(ob).parent().find('label.fl').after(\"<div id='\"+row+\"-left' class='leftCol'></div><div id='\"+row+\"-right' class='rightCol'></div>\");\n";
+        } else {
+            echo "					$(\"#\"+row+\"\").find('span[data-kind=field-value]').append(\"<div id='\"+row+\"-left' class='leftCol'></div><div id='\"+row+\"-right' class='rightCol'></div>\");\n";
+        }
 		echo "				}\n";
 		echo "				done = true;\n";
 		echo "			});\n";
