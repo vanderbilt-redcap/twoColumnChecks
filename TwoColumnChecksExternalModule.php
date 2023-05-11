@@ -16,7 +16,7 @@ class TwoColumnChecksExternalModule extends AbstractExternalModule
                 $this->disableUserBasedSettingPermissions();
         }
 
-        function hook_survey_page ($project_id,$record = NULL,$instrument,$event_id, $group_id, $survey_hash,$response_id, $repeat_instance) {
+        function hook_survey_page ($project_id, $record,$instrument,$event_id, $group_id, $survey_hash,$response_id, $repeat_instance) {
 		echo "<script>\n";
 		echo "function twoColumnCheckboxes() {\n";
 		echo "	var checkboxes = {};\n";
@@ -36,7 +36,7 @@ class TwoColumnChecksExternalModule extends AbstractExternalModule
         if (version_compare(REDCAP_VERSION, '12.0.0', '<')) {
 		    echo "					$(ob).parent().find('label.fl').after(\"<div id='\"+row+\"-left' class='leftCol'></div><div id='\"+row+\"-right' class='rightCol'></div>\");\n";
         } else {
-            echo "					$(\"#\"+row+\"\").find('span[data-kind=field-value]').append(\"<div id='\"+row+\"-left' class='leftCol'></div><div id='\"+row+\"-right' class='rightCol'></div>\");\n";
+            echo "					$(\"#\"+row+\"\").find('div[data-kind=field-value]').append(\"<div id='\"+row+\"-left' class='leftCol'></div><div id='\"+row+\"-right' class='rightCol'></div>\");\n";
         }
 		echo "				}\n";
 		echo "				done = true;\n";
