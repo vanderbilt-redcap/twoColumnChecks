@@ -17,47 +17,49 @@ class TwoColumnChecksExternalModule extends AbstractExternalModule
         }
 
         function hook_survey_page ($project_id, $record,$instrument,$event_id, $group_id, $survey_hash,$response_id, $repeat_instance) {
-		echo "<script>\n";
-		echo "function twoColumnCheckboxes() {\n";
-		echo "	var checkboxes = {};\n";
-		echo "	$('tr td div.choicevert').each(function(index, ob) {\n";
-		echo "		var row = $(ob).closest('tr').attr('id');\n";
-		echo "		if (typeof checkboxes[row] == 'undefined') {\n";
-		echo "			checkboxes[row] = 0;\n";
-		echo "		}\n";
-		echo "		checkboxes[row]++;\n";
-		echo "	});\n";
-		echo "	for (var row in checkboxes) {\n";
-		echo "		var done = false;\n";
-		echo "		if (checkboxes[row] > 10) {\n";
-		echo "			var checksInCol = Math.ceil(checkboxes[row] / 2);\n";
-		echo "			$(\"#\"+row+\" td div.choicevert\").each(function(index, ob) {\n";
-		echo "				if (!done) {\n";
-        if (version_compare(REDCAP_VERSION, '12.0.0', '<')) {
-		    echo "					$(ob).parent().find('label.fl').after(\"<div id='\"+row+\"-left' class='leftCol'></div><div id='\"+row+\"-right' class='rightCol'></div>\");\n";
-        } else {
-            echo "					$(\"#\"+row+\"\").find('div[data-kind=field-value]').append(\"<div id='\"+row+\"-left' class='leftCol'></div><div id='\"+row+\"-right' class='rightCol'></div>\");\n";
+            if (version_compare(REDCAP_VERSION, '12.0.0', '<')) {
+                $line = "$(ob).parent().find('label.fl').after(\"<div id='\"+row+\"-left' class='leftCol'></div><div id='\"+row+\"-right' class='rightCol'></div>\");";
+            } else {
+                $line = "$('#'+row).find('div[data-kind=field-value]').append(\"<div id='\"+row+\"-left' class='leftCol'></div><div id='\"+row+\"-right' class='rightCol'></div>\");";
+            }
+            echo "
+<script>
+        function twoColumnCheckboxes() {
+            const checkboxes = {};
+            $('tr td div.choicevert').each(function(index, ob) {
+        	    const row = $(ob).closest('tr').attr('id');
+        	    if (typeof checkboxes[row] == 'undefined') {
+        		    checkboxes[row] = 0;
+        	    }
+        	    checkboxes[row]++;
+            });
+            for (let row in checkboxes) {
+        	    let done = false;
+        	    if (checkboxes[row] > 10) {
+                    const checksInCol = Math.ceil(checkboxes[row] / 2);
+                    $('#'+row+' td div.choicevert').each(function(index, ob) {
+                        if (!done) {
+                            $line
+                        }
+                        done = true;
+                    });
+                    $('#'+row+' td div.choicevert').each(function(index, ob) {
+                        if (index < checksInCol) {
+                            $(ob).appendTo('#'+row+'-left');
+                        } else {
+                            $(ob).appendTo('#'+row+'-right');
+                        }
+                    });
+                }
+            }
         }
-		echo "				}\n";
-		echo "				done = true;\n";
-		echo "			});\n";
-		echo "			$(\"#\"+row+\" td div.choicevert\").each(function(index, ob) {\n";
-		echo "				if (index < checksInCol) {\n";
-		echo "					$(ob).appendTo(\"#\"+row+\"-left\");\n";
-		echo "				} else {\n";
-		echo "					$(ob).appendTo(\"#\"+row+\"-right\");\n";
-		echo "				}\n";
-		echo "			});\n";
-		echo "		}\n";
-		echo "	}\n";
-		echo "}\n";
-		echo "$(document).ready(function() {\n";
-		echo "	twoColumnCheckboxes();\n";
-		echo "});\n";
-		echo "</script>\n";
-		echo "<style>\n";
-		echo "div.leftCol { width: 50%; float: left; }\n";
-		echo "div.rightCol { width: 50%; float: right; }\n";
-		echo "</style>\n";
+        $(document).ready(function() {
+            twoColumnCheckboxes();
+        });
+</script>
+<style>
+    div.leftCol { width: 50%; float: left; }
+    div.rightCol { width: 50%; float: right; }
+</style>";
 	}
 }
