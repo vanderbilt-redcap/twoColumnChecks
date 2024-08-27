@@ -26,24 +26,26 @@ class TwoColumnChecksExternalModule extends AbstractExternalModule
 <script>
         function twoColumnCheckboxes() {
             const checkboxes = {};
-            $('tr td div.choicevert').each(function(index, ob) {
-        	    const row = $(ob).closest('tr').attr('id');
-        	    if (typeof checkboxes[row] == 'undefined') {
-        		    checkboxes[row] = 0;
-        	    }
-        	    checkboxes[row]++;
+	        $('tr td').each(function(index, ob) {
+                if ($(ob).find('div.choicevert').length > 0) {
+        	        const row = $(ob).closest('tr').attr('id');
+        	        if (typeof checkboxes[row] == 'undefined') {
+        		        checkboxes[row] = 0;
+        	        }
+        	        checkboxes[row]++;
+                }
             });
             for (let row in checkboxes) {
         	    let done = false;
         	    if (checkboxes[row] > 10) {
                     const checksInCol = Math.ceil(checkboxes[row] / 2);
-                    $('#'+row+' td div.choicevert').each(function(index, ob) {
+                    $('#'+row+' td').find('div.choicevert').each(function(index, ob) {
                         if (!done) {
                             $line
                         }
                         done = true;
                     });
-                    $('#'+row+' td div.choicevert').each(function(index, ob) {
+                    $('#'+row+' td').find('div.choicevert').each(function(index, ob) {
                         if (index < checksInCol) {
                             $(ob).appendTo('#'+row+'-left');
                         } else {
