@@ -9,7 +9,7 @@ require_once APP_PATH_DOCROOT.'Classes/Files.php';
 
 class TwoColumnChecksExternalModule extends AbstractExternalModule
 {
-        function hook_survey_page ($project_id, $record,$instrument,$event_id, $group_id, $survey_hash,$response_id, $repeat_instance) {
+        function redcap_survey_page ($project_id, $record,$instrument,$event_id, $group_id, $survey_hash,$response_id, $repeat_instance) {
             if (version_compare(REDCAP_VERSION, '12.0.0', '<')) {
                 $line = "$(ob).parent().find('label.fl').after(\"<div id='\"+row+\"-left' class='leftCol'></div><div id='\"+row+\"-right' class='rightCol'></div>\");";
             } else {

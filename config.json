@@ -13,11 +13,6 @@
 
 	"description": "Reorients a left-vertically-aligned group of checkboxes into two columns - only if more than ten checkboxes exist in the list (surveys only). This will save room on a survey, but note that it requires the checkbox have LV alignment.",
 
-	"permissions": [
-		"hook_survey_page",
-		"select_data"
-	],
-
 	"framework-version": 14,
 	
 	"compatibility": {
