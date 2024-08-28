@@ -17,6 +17,8 @@
 		"hook_survey_page",
 		"select_data"
 	],
+
+	"framework-version": 14,
 	
 	"compatibility": {
 		"php-version-min": "5.5.0",
